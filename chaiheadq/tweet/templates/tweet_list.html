@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block title %}
+yash n tweet
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">welcome to django project</h1>
+
+<a class="btn btn-primary mb-4" href="{% url 'tweet_create'%}">Create Tweet</a>
+
+<!-- filepath: /C:/django/tutorial project/chaiheadq/tweet/templates/tweet_list.html -->
+<div class="container row gap-3">
+    {% for tweet in tweets %}
+    <div class="card" style="width: 18rem;">
+        {% if tweet.photo %}
+            <img src="{{ tweet.photo.url }}" alt="tweet img" class="card-img-top">
+        {% endif %}
+        <div class="card-body">
+            <h5 class="card-title">{{ tweet.user.username }}</h5>
+            <p class="card-text">{{ tweet.text }}<br>
+                {% if tweet.user == user %}
+                <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
+                <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

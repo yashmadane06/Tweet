@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}
+Search Tweets
+{% endblock %}
+{% block content %}
+    <h1>Search Tweets</h1>
+    <form method="get">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Search</button>
+    </form>
+    <ul>
+        {% for tweet in results %}
+            <li>{{ tweet.text }}</li>
+        {% empty %}
+            <li>No results found</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
